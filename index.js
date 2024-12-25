@@ -1,12 +1,17 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
+const bodyParser = require('body-parser');
 const app = express();
 
 // Basic Configuration
 const port = process.env.PORT || 3000;
 
 app.use(cors());
+app.use(bodyParser.urlencoded({ extended: true })); // For form submissions
+app.use(bodyParser.json()); // For JSON body parsing
+app.use(express.json()); // Alternative built-in body parser for JSON
+app.use(express.urlencoded({ extended: true })); // Built-in body parser for URL-encoded data
 
 app.use('/public', express.static(`${process.cwd()}/public`));
 
